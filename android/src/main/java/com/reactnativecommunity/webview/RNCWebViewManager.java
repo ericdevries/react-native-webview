@@ -1,5 +1,7 @@
 package com.reactnativecommunity.webview;
 
+import android.net.http.SslError;
+import android.webkit.SslErrorHandler;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.DownloadManager;
@@ -714,6 +716,12 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
     protected boolean mLastLoadFailed = false;
     protected @Nullable
     ReadableArray mUrlPrefixesForDefaultIntent;
+
+    
+    @Override
+    public void onReceivedSslError(final WebView webView, final SslErrorHandler handler, final SslError error) {
+      handler.proceed();
+    }
 
     @Override
     public void onPageFinished(WebView webView, String url) {
